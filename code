@@ -1,0 +1,46 @@
+#Hill Climbing
+dict1 = {'a':[('b',4),('c',5)],
+        'b':[('d',3),('e',4)],
+        'c':[('h',4)],
+        'h':[('d',3)],
+        'd':[('j',2)],
+        'j':[('g',1)]
+       }
+
+def second_item(q):
+    return q[1]
+
+
+def HC(dict1,goal):
+    visited = []
+    pq = []
+    pq.append(('a',7))
+    
+    while len(pq)>0:
+        
+        #print(pq)
+        nod = pq.pop(0)
+        #print(nod)
+        
+        if nod not in visited:
+            visited.append(nod)
+            print(visited)
+            
+        if nod[0] is goal:
+            #print('find goal state , Cost : '+str(nod[1]))
+            return
+        
+        child = dict1.get(nod[0])
+        #print(child)
+        for i in child:
+            #print(i[1]+nod[i])
+            if i not in visited:
+                #print(i[1])
+                if i[1]<nod[1]:
+                    j = (i[0],i[1])
+                    pq.append(j)
+            
+        pq.sort(key=second_item)
+
+        
+HC(dict1,'g')
